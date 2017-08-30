@@ -244,6 +244,23 @@ case ${osinfo} in
     fi
     cd ..
   ;;
+  Arch)
+    echo '[*] Installing Arch Dependencies'
+    pacman -Syy python2-qtpy python2-pip xorg-server-xvfb phantomjs geckodriver
+    echo '[*] Installing RDPY'
+    git clone https://github.com/ChrisTruncer/rdpy.git
+    cd rdpy
+    python setup.py install
+    cd ..
+    rm -rf rdpy
+    echo '[*] Installing Python Modules'
+    pip install fuzzywuzzy
+    pip install selenium
+    pip install python-Levenshtein
+    pip install pyasn1 --upgrade
+    pip install pyvirtualdisplay
+    pip install netaddr
+  ;;
   # Notify Manual Installation Requirement And Exit
   *)
     echo "[Error]: ${osinfo} is not supported by this setup script."
